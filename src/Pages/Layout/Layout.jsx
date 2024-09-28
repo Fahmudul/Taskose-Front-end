@@ -3,7 +3,7 @@ import { Outlet } from "react-router";
 
 const Layout = () => {
   return (
-    <div className="container mx-auto ">
+    <div className="mx-auto ">
       <Outlet />
     </div>
   );

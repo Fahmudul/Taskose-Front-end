@@ -1,3 +1,176 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background: #212121;
+}
+
+.page.sidebar-2-page {
+  background: var(--side_bar_background);
+  height: 100%;
+}
+
+.sidebar-2 {
+  position: relative;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 100%;
+  background: red;
+  transition: width 0.4s;
+  height: 100%;
+}
+
+.sidebar-2.open {
+  width: 260px;
+}
+
+.sidebar-2 .inner {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 260px;
+}
+
+.sidebar-2 header {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding: 0 6px;
+  background: rgb(0 0 0 / 25%);
+}
+
+.sidebar-2-burger {
+  width: 44px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  color: #f9f9f9;
+}
+
+.sidebar-2 header > img {
+  height: 28px;
+}
+
+.sidebar-2 nav {
+  display: grid;
+  padding: 6px;
+  gap: 2px;
+}
+
+.sidebar-2 nav > a.active {
+  background: rgb(0 0 0 / 30%);
+}
+.sidebar-2 nav > a {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  height: 44px;
+  width: 44px;
+  font-family: "Poppins";
+  font-size: 16px;
+  text-transform: capitalize;
+  line-height: 1;
+  padding: 0 12px;
+  border-radius: 8px;
+  color: #f9f9f9;
+}
+#logoutBtn {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  height: 44px;
+  width: 44px;
+  font-family: "Poppins";
+  font-size: 16px;
+  text-transform: capitalize;
+  line-height: 1;
+  padding: 0 12px;
+  border-radius: 8px;
+  color: #f9f9f9;
+}
+
+.sidebar-2 nav > a:hover,
+button:hover {
+  background: rgb(0 0 0 / 30%);
+}
+#openSidebarBtn:hover {
+  background: none;
+}
+.sidebar-2 header > img,
+.sidebar-2 nav > a p {
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.sidebar-2.open :is(nav a p, header > img) {
+  opacity: 1;
+}
+
+.sidebar-2.open nav > a {
+  width: 100%;
+}
+
+/* Sign Up Form Style */
+
+::selection {
+  background-color: gray;
+}
+
+.container_ {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_ {
+  width: 400px;
+  height: 400px;
+  background-image: linear-gradient(to bottom, #424242, #212121);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 0.5rem;
+}
+
+.title_ {
+  color: wheat;
+  margin: 3rem 0;
+  font-size: 2rem;
+}
+
+.input_ {
+  margin: 0.5rem 0;
+  padding: 1rem 0.5rem;
+  width: 20rem;
+  background-color: inherit;
+  color: wheat;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid wheat;
+  transition: all 400ms;
+}
+.input_:hover {
+  background-color: #424242;
+  border: none;
+  border-radius: 0.5rem;
+}
+.btn_ {
+  height: 3rem;
+  width: 20rem;
+  margin-top: 3rem;
+  background-color: #f5deb3;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1.2rem;
+  transition: all 400ms;
+  cursor: pointer;
+  box-shadow: 0 0 10px antiquewhite, 0 0 10px antiquewhite;
+}
+.btn_:hover {
+  background-color: antiquewhite;
+  box-shadow: none;
+}
