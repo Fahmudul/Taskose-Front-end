@@ -5,6 +5,11 @@ import Dashboard from "../Dashboard/Dashboard";
 import SignUp from "../Pages/SignUp/SignUp";
 import SignIn from "../Pages/SignIn/SignIn";
 import Profile from "../Components/Profile/Profile";
+import CreateTask from "../Pages/CreateTask/CreateTask";
+import AllTask from "../Pages/AllTask/AllTask";
+import UpdateTask from "../Pages/Update/UpdateTask";
+import AllUsers from "../Pages/AllUsers/AllUsers";
+import AllTasks from "../Pages/AllTasks/AllTasks";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +28,26 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
+      },
+      {
+        path: "statistics",
+        element: <AllUsers />,
+      },
+      {
+        path: "create-task",
+        element: <CreateTask />,
+      },
+      {
+        path: "all-task",
+        element: <AllTask />,
+      },
+      {
+        path: "all-tasks",
+        element: <AllTasks />,
+      },
+      {
+        path: "update-task/:id",
+        element: <UpdateTask />,
       },
     ],
   },

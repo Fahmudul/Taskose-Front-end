@@ -21,7 +21,7 @@ const SignIn = () => {
       console.log(response.data);
       if (response?.data?.status === 200) {
         localStorage.setItem("token", response?.data?.token);
-        window.location.href = "/dashboard";
+        window.location.href = "/dashboard/profile";
       }
       // setTimeout(() => {
       //   window.location.href = "/sign-in";

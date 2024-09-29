@@ -82,7 +82,7 @@ const Dashboard = () => {
           </aside>
         </section>
       </div>
-      <div className="bgColor flex-1" style={{ width: "85%" }}>
+      <div className="bgColor flex-1 flex items-center" style={{ width: "85%" }}>
         <Outlet></Outlet>
       </div>
     </div>

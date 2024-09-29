@@ -13,30 +13,18 @@ const AdminBar = () => {
         </span>
         <p>My Profile</p>
       </NavLink>
-      <NavLink to="makeannouncements">
+      <NavLink to="statistics">
         <span>
           <MdOutlineAnnouncement className="w-6 h-6" />
         </span>
         <p>Make Announcement</p>
       </NavLink>
 
-      <NavLink to="members">
+      <NavLink to="all-tasks">
         <span>
           <FaUsersLine className="w-6 h-6" />
         </span>
-        <p>Manage Members</p>
-      </NavLink>
-      <NavLink to="requests">
-        <span>
-          <VscRequestChanges className="w-6 h-6" />
-        </span>
-        <p>Agreement Requests</p>
-      </NavLink>
-      <NavLink to="coupons">
-        <span>
-          <BiSolidCoupon className="w-6 h-6" />
-        </span>
-        <p>Manage Coupons</p>
+        <p>All Tasks</p>
       </NavLink>
     </>
   );

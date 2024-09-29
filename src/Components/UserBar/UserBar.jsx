@@ -1,36 +1,30 @@
-import { MdOutlineAnnouncement } from "react-icons/md";
-import { RiProfileLine } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
 import { BiSolidCoupon } from "react-icons/bi";
-import { FaUsersLine } from "react-icons/fa6";
-import { VscRequestChanges } from "react-icons/vsc";
+import { FaTasks } from "react-icons/fa";
+import { IoCreateOutline } from "react-icons/io5";
+import useInfo from "../../Hooks/useInfo";
 const AdminBar = () => {
+  const userInfo = useInfo();
   return (
     <>
-      <NavLink to="profileA">
+      <NavLink to="profile">
         <span className="material-symbols-outlined">
-          <RiProfileLine className="w-6 h-6" />
+          <CgProfile className="w-6 h-6" />
         </span>
         <p>My Profile</p>
       </NavLink>
-      <NavLink to="makeannouncements">
+      <NavLink to="create-task">
         <span>
-          <MdOutlineAnnouncement className="w-6 h-6" />
+          <IoCreateOutline className="w-6 h-6" />
         </span>
-        <p>Make Announcement</p>
+        <p>Create Task</p>
       </NavLink>
-
-      <NavLink to="members">
+      <NavLink to="all-task">
         <span>
-          <FaUsersLine className="w-6 h-6" />
+          <FaTasks className="w-6 h-6" />
         </span>
-        <p>Manage Members</p>
-      </NavLink>
-      <NavLink to="requests">
-        <span>
-          <VscRequestChanges className="w-6 h-6" />
-        </span>
-        <p>Agreement Requests</p>
+        <p>{userInfo?.data?.role === "Admin" ? "All tasks" : "My tasks"}</p>
       </NavLink>
     </>
   );

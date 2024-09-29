@@ -8,7 +8,7 @@ const axiosSecure = axios.create({
 const useInfo = () => {
   const axiosSecure = useAxiosSecure();
   const { data, refetch, isLoading } = useQuery({
-    queryKey: "user-info",
+    queryKey: ["user-info"],
     queryFn: async () => {
       const reponse = await axiosSecure(
         `${import.meta.env.VITE_BASE_URL}/user-info`

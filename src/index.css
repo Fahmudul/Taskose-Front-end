@@ -18,7 +18,7 @@ body {
   left: 0;
   width: 56px;
   height: 100%;
-  background: red;
+  background: linear-gradient(to bottom, #424242, #212121);
   transition: width 0.4s;
   height: 100%;
 }
@@ -137,7 +137,7 @@ button:hover {
 }
 
 .title_ {
-  color: wheat;
+  color: #f5deb3;
   margin: 3rem 0;
   font-size: 2rem;
 }
@@ -153,7 +153,18 @@ button:hover {
   border-bottom: 1px solid wheat;
   transition: all 400ms;
 }
-.input_:hover {
+.input__ {
+  margin: 0.5rem 0;
+  padding: 1rem 0.5rem;
+  background-color: inherit;
+  color: wheat;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid wheat;
+  transition: all 400ms;
+}
+.input_:hover,
+.input__:hover {
   background-color: #424242;
   border: none;
   border-radius: 0.5rem;
@@ -173,4 +184,198 @@ button:hover {
 .btn_:hover {
   background-color: antiquewhite;
   box-shadow: none;
+}
+
+/* Create task form */
+.create-task {
+  width: 90%;
+  height: 90%;
+  background: linear-gradient(to bottom, #424242, #212121);
+}
+
+/* Check box */
+/* From Uiverse.io by Smit-Prajapati */
+.checkbox_ {
+  appearance: none;
+  overflow: hidden;
+  min-width: 30px;
+  aspect-ratio: 1/1;
+  border-radius: 30% 70% 70% 30%/30% 30% 70% 70%;
+  border: 2px solid rgb(255, 102, 0);
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+.checkbox_::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  font-size: 35px;
+  transition: all 0.2s ease-in-out;
+}
+
+.checkbox_:checked {
+  border: 2px solid rgb(255, 212, 59);
+  background: linear-gradient(
+    135deg,
+    rgb(255, 212, 59) 0%,
+    rgb(255, 102, 0) 100%
+  );
+  /* box-shadow: -5px -5px 30px rgba(255, 212, 59, 1), 5px 5px 30px rgba(255, 102, 0, 1); */
+}
+
+.checkbox_:checked::before {
+  background: linear-gradient(
+    135deg,
+    rgb(255, 212, 59) 0%,
+    rgb(255, 102, 0) 100%
+  );
+}
+
+/* Radion button style */
+
+._input {
+  -webkit-appearance: none;
+  /* remove default */
+  display: block;
+  margin: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  vertical-align: middle;
+  box-shadow: hsla(0, 0%, 100%, 0.15) 0 1px 1px,
+    inset hsla(0, 0%, 0%, 0.5) 0 0 0 1px;
+  background-color: hsla(0, 0%, 0%, 0.2);
+  background-image: -webkit-radial-gradient(
+    hsla(200, 100%, 90%, 1) 0%,
+    rgb(255, 207, 102) 15%,
+    hsla(49, 100%, 60%, 0.3) 28%,
+    hsla(200, 100%, 30%, 0) 70%
+  );
+  background-repeat: no-repeat;
+  -webkit-transition: background-position 0.15s cubic-bezier(0.8, 0, 1, 1),
+    -webkit-transform 0.25s cubic-bezier(0.8, 0, 1, 1);
+  outline: none;
+}
+
+._input:checked {
+  -webkit-transition: background-position 0.2s 0.15s cubic-bezier(0, 0, 0.2, 1),
+    -webkit-transform 0.25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+._input:active {
+  -webkit-transform: scale(1.5);
+  -webkit-transition: -webkit-transform 0.1s cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* The up/down direction logic */
+
+._input,
+._input:active {
+  background-position: 0 24px;
+}
+
+._input:checked {
+  background-position: 0 0;
+}
+
+._input:checked ~ ._input,
+._input:checked ~ ._input:active {
+  background-position: 0 -24px;
+}
+
+
+/* Main Card Styles */
+._card_ {
+  width: 18em;
+  height: 22.5em;
+  background: linear-gradient(
+    145deg,
+    #1c1c1c,
+    #282828
+  ); /* Soft gradient for depth */
+  transition: 0.5s ease-in-out;
+  clip-path: polygon(
+    30px 0%,
+    100% 0,
+    100% calc(100% - 30px),
+    calc(100% - 30px) 100%,
+    0 100%,
+    0% 30px
+  );
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Adding subtle shadow */
+  padding: 1.5em;
+  color: white;
+  position: relative;
+}
+
+/* Hover effect for card to scale and glow */
+._card_:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7); /* Darker shadow on hover */
+}
+
+/* Card Header - Image Section */
+
+/* Title & Description Styling */
+._card_ span {
+  font-weight: bold;
+  font-size: 1.2rem; /* Slightly larger font */
+  color: #ffffff;
+  text-align: center;
+  margin: 0.5em 0;
+}
+
+._card_ ._info_ {
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: #aaaaaa; /* Softer gray for descriptions */
+  margin: 1em;
+  text-align: center;
+}
+
+/* Styling for clickable links */
+._card_ a {
+  color: #ffb400; /* Golden color for links */
+  transition: 0.3s ease-in-out;
+}
+
+._card_ a:hover {
+  color: #ffd700; /* Lighter shade of gold on hover */
+}
+
+/* Buttons and Interactions */
+._card_ button {
+  background: #333;
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 10px;
+  border: none;
+  transition: background 0.4s ease;
+}
+
+/* Footer action buttons (edit/trash) */
+._card_ .card-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: auto;
+}
+
+._card_ .card-actions i {
+  font-size: 1.2em;
+  color: #ffb400; /* Gold for icons */
+  transition: color 0.4s ease;
+}
+
+._card_ .card-actions i:hover {
+  color: #ffd700; /* Lighter gold on hover */
+}
+
+.bg-linear {
+  background-image: linear-gradient(to bottom, #424242, #212121);
 }
