@@ -14,6 +14,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { RxExit } from "react-icons/rx";
 import useInfo from "../Hooks/useInfo";
 import { UserAuthContext } from "../UserContext/UserContext";
+import { CgProfile } from "react-icons/cg";
 // import { RxExit } from "react-icons/rx";
 // import useAuthInfo from "../../Hooks/useAuthInfo/useAuthInfo";
 const Dashboard = () => {
@@ -57,9 +58,9 @@ const Dashboard = () => {
                   {" "}
                   <NavLink to="/" className="absolute bottom-14">
                     <span className="material-symbols-outlined">
-                      <RiHome3Line className="w-6 h-6" />
+                      <CgProfile className="w-6 h-6" />
                     </span>
-                    <p>Home</p>
+                    <p>{userInfo?.userName}</p>
                   </NavLink>
                   <button
                     className="absolute bottom-2"

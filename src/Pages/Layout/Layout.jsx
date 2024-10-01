@@ -1,12 +1,7 @@
 import React from "react";
-import { Outlet } from "react-router";
 
 const Layout = () => {
-  return (
-    <div className="mx-auto ">
-      <Outlet />
-    </div>
-  );
+  return (window.location.href = "/sign-in");
 };
 
 export default Layout;

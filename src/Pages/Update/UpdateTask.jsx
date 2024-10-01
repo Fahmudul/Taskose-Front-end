@@ -31,7 +31,7 @@ const CreateTask = () => {
       taskDescription: form.get("taskDescription"),
       dueDate: form.get("dueDate"),
       priority: form.get("radio"),
-      assignedTo: [{ email: userInfo?.email, status: "To Do" }],
+      assignedTo: [{ email: userInfo?.email, status: form.get("status") }],
     };
     console.log(taskInfo);
     if (
@@ -89,27 +89,65 @@ const CreateTask = () => {
                 name="taskTitle"
               />
             </div>
-            <div className="flex items-center gap-3 mx-auto  justify-between">
-              <label
-                htmlFor="dueDate"
-                className="text-xl font-semibold text-[#f5deb3]"
-              >
-                Due Date
-              </label>
-              <input
-                placeholder="Enter task title"
-                className="username input__ w-[90%]"
-                name="dueDate"
-                style={{ border: "none" }}
-                type="date"
-                id="dueDate"
-              />
+            <div className="flex  justify-between  ">
+              <div className="flex items-center gap-3   w-[35%] ">
+                <label
+                  htmlFor="dueDate"
+                  className="text-xl font-semibold text-[#f5deb3] w-[150px] "
+                >
+                  Due Date
+                </label>
+                <input
+                  placeholder="Enter task title"
+                  className="username input__ w-[90%]"
+                  name="dueDate"
+                  style={{ border: "none" }}
+                  type="date"
+                  id="dueDate"
+                />
+              </div>
+              <div className="flex flex-col  gap-3  w-[20%] ">
+                <label
+                  htmlFor=""
+                  className="text-xl font-semibold text-[#f5deb3] mr-5"
+                >
+                  Status
+                </label>
+                <div className="radio-input flex-1 flex space-x-3">
+                  <div className="flex w-full items-center text-[#989fa0]">
+                    <label htmlFor="medium">In Progress</label>
+                    <input
+                      name="status"
+                      type="radio"
+                      className="_input"
+                      id="inProgress"
+                      value="inProgress"
+                      defaultChecked={
+                        data?.status === "In Progress" ? true : false
+                      }
+                    />
+                  </div>
+                  <div className="flex  w-full items-center text-[#989fa0]">
+                    <label htmlFor="high">Completed</label>
+                    <input
+                      name="status"
+                      type="radio"
+                      className="_input"
+                      id="completed"
+                      value="completed"
+                      defaultChecked={
+                        data?.status === "Completed" ? true : false
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="flex  justify-between ">
               <div className="flex items-start gap-3  ">
                 <label
                   htmlFor=""
-                  className="text-xl font-semibold text-[#f5deb3] mr-[38px]"
+                  className="text-xl font-semibold text-[#f5deb3] mr-[13px]"
                 >
                   Assigned to
                 </label>

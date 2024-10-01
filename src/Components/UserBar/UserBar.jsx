@@ -11,12 +11,7 @@ const AdminBar = () => {
 
   return (
     <>
-      <NavLink to="profile">
-        <span className="material-symbols-outlined">
-          <CgProfile className="w-6 h-6" />
-        </span>
-        <p>My Profile</p>
-      </NavLink>
+     
       <NavLink to="create-task">
         <span>
           <IoCreateOutline className="w-6 h-6" />

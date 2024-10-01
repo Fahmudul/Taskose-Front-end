@@ -3,19 +3,31 @@ import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import TaskCard from "../../Components/TaskCard/TaskCard";
 import { IoSearch } from "react-icons/io5";
+import useTaskNumber from "../../Hooks/useTaskNumber";
 
 const AllTasks = () => {
   const axiosSecure = useAxiosSecure();
   const [allTasks, setAllTasks] = useState([]);
-
+  const { documentCount } = useTaskNumber();
+  const numberOfItemsInOnePage = 10;
+  const numberOfButtons = Math.ceil(documentCount / numberOfItemsInOnePage);
+  const numberOfBtnArray = Array.from("_".repeat(numberOfButtons));
+  const [currentPage, setCurrentPage] = useState(1);
+  // console.log(numberOfBtnArray);
+  // console.log(documentCount);
   useEffect(() => {
     const getTasks = async () => {
-      const { data } = await axiosSecure("/all-tasks-admin");
-      setAllTasks(data.tasks);
+      const { data } = await axiosSecure(
+        `/all-tasks-admin?page=${currentPage}&size=${numberOfItemsInOnePage}`
+      );
+      if (data) {
+        setAllTasks(data?.tasks);
+      }
     };
 
     getTasks();
-  }, [axiosSecure]);
+  }, [axiosSecure, currentPage]);
+
   // console.log(allTasks);
   const filterTasks = async (filterOption) => {
     let status;
@@ -39,13 +51,13 @@ const AllTasks = () => {
     }
     // return filter;
     const response = await axiosSecure(
-      `/filter-tasks?status=${status}&priority=${priority}&filter=${filter}`
+      `/filter-tasks?status=${status}&priority=${priority}&filter=${filter}&page=${currentPage}&size=${numberOfItemsInOnePage}`
     );
     console.log(response.data.filteredTask);
     setAllTasks(response?.data?.filteredTask);
   };
   return (
-    <div className="relative flex  items-center w-[90%]  mx-auto h-[90%] flex-col bg-linear rounded-3xl shadow-2xl">
+    <div className="relative flex  items-center w-[90%]  mx-auto h-[95%] flex-col bg-linear rounded-3xl shadow-2xl">
       <h1 className="text-center mt-6 text-3xl font-bold my-10 text-[#f5deb3]">
         All Task
       </h1>
@@ -123,6 +135,20 @@ const AllTasks = () => {
             No tasks found!
           </div>
         )}
+      </div>
+      {/* <Pagination /> */}
+      <div className="  h-[65px] absolute bottom-1 rounded-md shadow-lg  flex justify-center gap-5 items-center">
+        {numberOfBtnArray.map((btn, idx) => (
+          <button
+            key={idx}
+            className={` text-xl text-[#f5deb3] btn bg-linear outline-none border-none shadow-md shadow-white/20 ${
+              currentPage === idx + 1 ? "btn-active" : ""
+            }`}
+            onClick={() => setCurrentPage(idx + 1)}
+          >
+            {idx + 1}
+          </button>
+        ))}
       </div>
     </div>
   );

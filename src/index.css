@@ -288,7 +288,7 @@ button:hover {
 /* Main Card Styles */
 ._card_ {
   width: 18em;
-  height: 25.5em;
+  /* height: 25.5em; */
   background: linear-gradient(
     145deg,
     #1c1c1c,
@@ -309,7 +309,7 @@ button:hover {
   flex-direction: column;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Adding subtle shadow */
   /* padding: 1.5em; */
-  color: white;
+  /* color: white; */
   position: relative;
 }
 
@@ -325,7 +325,7 @@ button:hover {
 ._card_ span {
   font-weight: bold;
   font-size: 1.2rem; /* Slightly larger font */
-  color: #ffffff;
+  /* color: #ffffff; */
   text-align: center;
   margin: 0.5em 0;
 }
@@ -333,7 +333,7 @@ button:hover {
 ._card_ ._info_ {
   font-weight: 400;
   font-size: 0.9rem;
-  color: #aaaaaa; /* Softer gray for descriptions */
+  /* color: #aaaaaa; Softer gray for descriptions */
   margin: 1em;
   text-align: center;
 }

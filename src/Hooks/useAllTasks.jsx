@@ -6,7 +6,7 @@ const useAllTasks = () => {
   const { data, refetch, isLoading } = useQuery({
     queryKey: ["all-tasks"],
     queryFn: async () => {
-      const response = await axiosSecure("/all-tasks");
+      const response = await axiosSecure(`/all-tasks`);
       return response.data;
     },
   });

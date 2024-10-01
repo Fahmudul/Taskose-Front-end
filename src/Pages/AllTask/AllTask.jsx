@@ -10,9 +10,7 @@ import { Link } from "react-router-dom";
 const AllTask = () => {
   const { data: allTask = [], refetch } = useAllTasks();
   const { userInfo } = useContext(UserAuthContext);
-  console.log(userInfo);
   const axiosSecure = useAxiosSecure();
-  // console.log(allTask.tasks);
 
   const { mutateAsync } = useMutation({
     mutationKey: ["delete-task"],
