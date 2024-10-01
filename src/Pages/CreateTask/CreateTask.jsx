@@ -1,28 +1,55 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import UserName from "../../Components/UserName/UserName";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useInfo from "../../Hooks/useInfo";
+import { UserAuthContext } from "../../UserContext/UserContext";
 
 const CreateTask = () => {
   const axiosSecure = useAxiosSecure();
-  const userInfo = useInfo();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const email = searchParams.get("email");
+
+  const { userInfo } = useContext(UserAuthContext);
+  console.log(userInfo);
   const [taskInfo, setTaskInfo] = useState({
     taskTitle: "",
     taskDescription: "",
     dueDate: "",
-    priority: "",
+    priority: "low",
     assignedTo: {},
   });
 
   const handleCreateTask = async (e) => {
     e.preventDefault();
     try {
+      let adminAssignedtaskInfo = {};
+      const form = new FormData(e.target);
+      if (userInfo.role === "Admin") {
+        adminAssignedtaskInfo = {
+          ...taskInfo,
+          assignedTo: [
+            {
+              email: email,
+              status: "To Do",
+            },
+          ],
+        };
+        const response = await axiosSecure.post(
+          "/create-task",
+          adminAssignedtaskInfo
+        );
+        if (response?.data?.status === 200) {
+          toast.success(response?.data?.message);
+          return (window.location.href = "/dashboard/all-tasks");
+        }
+      }
       // console.log(taskInfo);
       const response = await axiosSecure.post("/create-task", taskInfo);
       if (response?.data?.status === 200) {
         toast.success(response?.data?.message);
+        return (window.location.href = "/dashboard/all-task");
       }
     } catch (error) {
       toast.error(error);
@@ -53,6 +80,7 @@ const CreateTask = () => {
                 className="username input__ w-[90%]"
                 type="text"
                 name="taskTitle"
+                required
                 onChange={(e) =>
                   setTaskInfo({ ...taskInfo, taskTitle: e.target.value })
                 }
@@ -69,7 +97,8 @@ const CreateTask = () => {
                 placeholder="Enter task title"
                 className="username input__ w-[90%]"
                 style={{ border: "none" }}
-                type="datetime-local"
+                type="date"
+                required
                 onChange={(e) =>
                   setTaskInfo({ ...taskInfo, dueDate: e.target.value })
                 }
@@ -87,13 +116,14 @@ const CreateTask = () => {
 
                 <input
                   className={`username input_   ml-8 ${
-                    userInfo?.data?.role === "Admin" ? "" : "cursor-not-allowed"
+                    userInfo?.role === "Admin" ? "" : "cursor-not-allowed"
                   }`}
                   defaultValue={
-                    userInfo?.data?.role === "Admin"
-                      ? ""
-                      : userInfo?.data?.email
+                    userInfo?.role === "Admin" ? email : userInfo?.email
                   }
+                  required
+                  type="email"
+                  name="email"
                   onChange={(e) =>
                     setTaskInfo({
                       ...taskInfo,
@@ -104,7 +134,7 @@ const CreateTask = () => {
                       },
                     })
                   }
-                  disabled={userInfo?.data?.role === "Admin" ? false : true}
+                  disabled={userInfo?.role === "Admin" ? false : true}
                 />
               </div>
               <div className="flex flex-col items-start gap-3  w-[20%]">
@@ -169,6 +199,7 @@ const CreateTask = () => {
                 placeholder="Write your description"
                 className="username input__ w-[90%] "
                 rows={7}
+                required
                 name="taskDescription"
                 onChange={(e) =>
                   setTaskInfo({ ...taskInfo, taskDescription: e.target.value })

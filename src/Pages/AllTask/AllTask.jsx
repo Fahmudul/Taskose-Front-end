@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import useAllTasks from "../../Hooks/useAllTasks";
 import TaskCard from "../../Components/TaskCard/TaskCard";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { UserAuthContext } from "../../UserContext/UserContext";
+import { Link } from "react-router-dom";
 
 const AllTask = () => {
   const { data: allTask = [], refetch } = useAllTasks();
+  const { userInfo } = useContext(UserAuthContext);
+  console.log(userInfo);
   const axiosSecure = useAxiosSecure();
-  console.log(allTask.tasks);
+  // console.log(allTask.tasks);
 
   const { mutateAsync } = useMutation({
     mutationKey: ["delete-task"],
@@ -49,11 +53,27 @@ const AllTask = () => {
       <h1 className="text-center mt-6 text-3xl font-bold my-10 text-[#f5deb3]">
         All Task
       </h1>
-      <div className="grid grid-cols-5  w-full gap-6 px-10 overflow-y-auto h-[87%] max-h-[670px] ">
-        {allTask.tasks?.map((task) => (
-          <TaskCard key={task._id} task={task} handleDelete={handleDelete} />
-        ))}
-      </div>
+
+      {allTask.tasks?.length === 0 ? (
+        <div className="text-3xl text-[#9ca3af] font-bold w-full flex flex-col justify-center  h-full items-center">
+          <p className="my-4 text-4xl">
+            Hi <span className="text-[#f5deb3]">{userInfo.userName}</span>
+          </p>
+          <p className="mb-20">Currently you have no task!</p>
+          <Link
+            to={"/dashboard/create-task"}
+            className="btn bg-[#f5deb3] text-center w-[160px]"
+          >
+            Create Task
+          </Link>
+        </div>
+      ) : (
+        <div className="grid grid-cols-5  w-full gap-6 px-10 overflow-y-auto h-[87%] max-h-[670px] ">
+          {allTask.tasks?.map((task) => (
+            <TaskCard key={task._id} task={task} handleDelete={handleDelete} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

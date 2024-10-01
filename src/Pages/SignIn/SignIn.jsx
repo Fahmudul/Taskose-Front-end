@@ -3,7 +3,7 @@ import "../../index.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-const SignIn = () => {
+const SignIn = React.memo(function SignIn() {
   const handleSignIn = async (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
@@ -12,20 +12,22 @@ const SignIn = () => {
       password: form.get("password"),
     };
 
-    console.log(userInfo);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/sign-in`,
-        userInfo
+        userInfo,
+        { withCredentials: true }
       );
       console.log(response.data);
       if (response?.data?.status === 200) {
-        localStorage.setItem("token", response?.data?.token);
-        window.location.href = "/dashboard/profile";
+        // localStorage.setItem("token", response?.data?.token);
+        if (response?.data?.userInfo?.role === "Admin") {
+          window.location.href = "/dashboard/statistics";
+        } else {
+          window.location.href = "/dashboard/all-task";
+        }
+
       }
-      // setTimeout(() => {
-      //   window.location.href = "/sign-in";
-      // }, 1200);
     } catch (error) {
       toast.error(error);
     }
@@ -60,6 +62,6 @@ const SignIn = () => {
       </div>
     </div>
   );
-};
+});
 
 export default SignIn;

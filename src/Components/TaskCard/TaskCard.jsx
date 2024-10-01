@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import useInfo from "../../Hooks/useInfo";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
@@ -6,11 +6,11 @@ import { Link, useNavigate, useNavigation } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { UserAuthContext } from "../../UserContext/UserContext";
 const TaskCard = ({ task, handleDelete }) => {
   const { taskTitle, taskDescription, dueDate, priority, assignedTo } = task;
   const navigate = useNavigate();
-  const userInfo = useInfo();
-
+  const { userInfo } = useContext(UserAuthContext);
   const handleEdit = () => {
     navigate(`/dashboard/update-task/${task._id}`);
   };
@@ -34,7 +34,20 @@ const TaskCard = ({ task, handleDelete }) => {
           <p className="font-bold text-[#f5deb3] text-lg">{priority}</p>
         </span>
       </div>
-      <span>Status: {assignedTo[0]?.status}</span>
+      <span className={`${userInfo?.role === "Admin" ? "block" : "hidden"} `}>
+        Assigned To: {assignedTo[0]?.email}
+      </span>
+      <span
+        className={`${
+          assignedTo[0]?.status === "To Do"
+            ? "text-[#B0BEC5]"
+            : assignedTo[0]?.status === "In Progress"
+            ? "text-[#42A5F5]"
+            : "text-[#66BB6A]"
+        } `}
+      >
+        Status: {assignedTo[0]?.status}
+      </span>
       <div className="flex text-[#f5deb3] w-full justify-between px-8 mt-3">
         <button onClick={() => handleDelete(task._id)}>
           <AiOutlineDelete className="w-8 h-8 text-yellow-400 hover:text-yellow-300" />

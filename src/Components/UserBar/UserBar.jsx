@@ -4,8 +4,11 @@ import { BiSolidCoupon } from "react-icons/bi";
 import { FaTasks } from "react-icons/fa";
 import { IoCreateOutline } from "react-icons/io5";
 import useInfo from "../../Hooks/useInfo";
+import { useContext } from "react";
+import { UserAuthContext } from "../../UserContext/UserContext";
 const AdminBar = () => {
-  const userInfo = useInfo();
+  const { userInfo } = useContext(UserAuthContext);
+
   return (
     <>
       <NavLink to="profile">

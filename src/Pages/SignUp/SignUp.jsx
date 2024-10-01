@@ -19,10 +19,12 @@ const SignUp = () => {
       );
       if (response?.data?.status === 200) {
         toast.success(response?.data?.message);
+        setTimeout(() => {
+          window.location.href = "/sign-in";
+        }, 1200);
+      } else {
+        toast.error(response?.data?.message);
       }
-      setTimeout(() => {
-        window.location.href = "/sign-in";
-      }, 1200);
     } catch (error) {
       toast.error(error);
     }
@@ -42,14 +44,19 @@ const SignUp = () => {
             placeholder="Email"
             name="email"
             className="username input_"
-            type="email"
+            type="text"
           />
-          <input
-            placeholder="Password"
-            className="password input_"
-            type="password"
-            name="password"
-          />
+          <div
+            className="tooltip"
+            data-tip="Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+          >
+            <input
+              placeholder="Password"
+              className="password input_"
+              type="password"
+              name="password"
+            />
+          </div>
           <button className="btn_ py-2" type="submit">
             Sign Up
           </button>

@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../Components/Navbar";
+import { Navigate } from "react-router";
 
 const Home = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    const data = fetch("http://localhost:5000/users").then((res) => res.json());
-    setData(data);
-  }, []);
-  return (
-    <div>
-      <p>hello {data.message}</p>
-    </div>
-  );
+  return Navigate("/sign-in");
 };
 
 export default Home;

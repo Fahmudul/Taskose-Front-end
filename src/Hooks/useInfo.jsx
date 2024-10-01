@@ -2,9 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
 import useAxiosSecure from "./useAxiosSecure";
-const axiosSecure = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
-});
+
 const useInfo = () => {
   const axiosSecure = useAxiosSecure();
   const { data, refetch, isLoading } = useQuery({

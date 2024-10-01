@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import UserName from "../../Components/UserName/UserName";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useInfo from "../../Hooks/useInfo";
 import { useQuery } from "@tanstack/react-query";
+import { UserAuthContext } from "../../UserContext/UserContext";
 
 const CreateTask = () => {
   const axiosSecure = useAxiosSecure();
-  const userInfo = useInfo();
+  const { userInfo } = useContext(UserAuthContext);
+  console.log(userInfo);
   const { id: taskId } = useParams();
   const { data = {} } = useQuery({
     queryKey: ["task-info"],
@@ -29,7 +31,7 @@ const CreateTask = () => {
       taskDescription: form.get("taskDescription"),
       dueDate: form.get("dueDate"),
       priority: form.get("radio"),
-      assignedTo: [{ email: userInfo?.data?.email, status: "To Do" }],
+      assignedTo: [{ email: userInfo?.email, status: "To Do" }],
     };
     console.log(taskInfo);
     if (
@@ -50,6 +52,10 @@ const CreateTask = () => {
       console.log(response.data);
       if (response?.data?.status === 200) {
         toast.success(response?.data?.message);
+        // return Navigate("/dashboard/all-task");
+        setTimeout(() => {
+          window.location.href = "/dashboard/all-task";
+        }, 1200);
       }
     } catch (error) {
       toast.error(error);
@@ -95,7 +101,7 @@ const CreateTask = () => {
                 className="username input__ w-[90%]"
                 name="dueDate"
                 style={{ border: "none" }}
-                type="datetime-local"
+                type="date"
                 id="dueDate"
               />
             </div>
@@ -109,14 +115,12 @@ const CreateTask = () => {
                 </label>
                 <input
                   className={`username input_   ml-8 ${
-                    userInfo?.data?.role === "Admin" ? "" : "cursor-not-allowed"
+                    userInfo?.role === "Admin" ? "" : "cursor-not-allowed"
                   }`}
                   type="text"
                   name="user"
                   defaultValue={
-                    userInfo?.data?.role === "Admin"
-                      ? ""
-                      : userInfo?.data?.email
+                    userInfo?.role === "Admin" ? "" : userInfo?.email
                   }
                   disabled={userInfo?.data?.role === "Admin" ? false : true}
                 />

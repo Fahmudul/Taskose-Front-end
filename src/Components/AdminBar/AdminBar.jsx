@@ -3,21 +3,15 @@ import { RiProfileLine } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
 import { BiSolidCoupon } from "react-icons/bi";
 import { FaUsersLine } from "react-icons/fa6";
-import { VscRequestChanges } from "react-icons/vsc";
+import { ImStatsBars } from "react-icons/im";
 const AdminBar = () => {
   return (
     <>
-      <NavLink to="profileA">
-        <span className="material-symbols-outlined">
-          <RiProfileLine className="w-6 h-6" />
-        </span>
-        <p>My Profile</p>
-      </NavLink>
       <NavLink to="statistics">
         <span>
-          <MdOutlineAnnouncement className="w-6 h-6" />
+          <ImStatsBars className="w-6 h-6" />
         </span>
-        <p>Make Announcement</p>
+        <p>Statistics</p>
       </NavLink>
 
       <NavLink to="all-tasks">

@@ -10,6 +10,8 @@ import AllTask from "../Pages/AllTask/AllTask";
 import UpdateTask from "../Pages/Update/UpdateTask";
 import AllUsers from "../Pages/AllUsers/AllUsers";
 import AllTasks from "../Pages/AllTasks/AllTasks";
+import PrivateRoute from "./PriavteRoute";
+import PublicRoute from "./PublicRoute";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,33 +33,61 @@ const router = createBrowserRouter([
       },
       {
         path: "statistics",
-        element: <AllUsers />,
+        element: (
+          <PrivateRoute>
+            <AllUsers />
+          </PrivateRoute>
+        ),
       },
       {
         path: "create-task",
-        element: <CreateTask />,
+        element: (
+          <PrivateRoute>
+            <CreateTask />
+          </PrivateRoute>
+        ),
       },
       {
         path: "all-task",
-        element: <AllTask />,
+        element: (
+          <PrivateRoute>
+            <AllTask />
+          </PrivateRoute>
+        ),
       },
       {
         path: "all-tasks",
-        element: <AllTasks />,
+        element: (
+          <PrivateRoute>
+            <AllTasks />
+          </PrivateRoute>
+        ),
       },
       {
         path: "update-task/:id",
-        element: <UpdateTask />,
+        element: (
+          <PrivateRoute>
+            <UpdateTask />
+          </PrivateRoute>
+        ),
       },
     ],
   },
   {
     path: "/sign-up",
-    element: <SignUp />,
+    element: (
+      <PublicRoute>
+        <SignUp />
+      </PublicRoute>
+    ),
   },
   {
     path: "/sign-in",
-    element: <SignIn />,
+    element: (
+      <PublicRoute>
+        <SignIn />
+      </PublicRoute>
+    ),
   },
 ]);
 

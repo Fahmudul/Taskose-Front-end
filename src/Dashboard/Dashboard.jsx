@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // import useAdmin from "../../Hooks/useAdmin/useAdmin";
 // import "./Dashboard.css";
 import { RiMenu2Fill, RiProfileLine } from "react-icons/ri";
@@ -13,18 +13,13 @@ import AdminBar from "../Components/AdminBar/AdminBar";
 import { NavLink, Outlet } from "react-router-dom";
 import { RxExit } from "react-icons/rx";
 import useInfo from "../Hooks/useInfo";
+import { UserAuthContext } from "../UserContext/UserContext";
 // import { RxExit } from "react-icons/rx";
 // import useAuthInfo from "../../Hooks/useAuthInfo/useAuthInfo";
 const Dashboard = () => {
   // const { SignOut } = useAuthInfo();
-  const handleLogout = () => {
-    // SignOut();
-  };
-  const { data } = useInfo();
-  console.log(data);
-  // const data = {
-  //   role: "user",
-  // };
+  const { userInfo, logout } = useContext(UserAuthContext);
+  console.log(userInfo);
 
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -52,12 +47,12 @@ const Dashboard = () => {
                   className="text-white text-2xl italic font-semibold tracking-widest pl-3 w-full"
                   // style={{ border: "1px solid red" }}
                 >
-                  CozyNest
+                  Taskose
                 </h1>
               </header>
               <nav>
-                {data?.role === "Admin" && <AdminBar />}
-                {data?.role === "User" && <UserBar />}
+                {userInfo?.role === "Admin" && <AdminBar />}
+                {userInfo?.role === "User" && <UserBar />}
                 <>
                   {" "}
                   <NavLink to="/" className="absolute bottom-14">
@@ -69,7 +64,7 @@ const Dashboard = () => {
                   <button
                     className="absolute bottom-2"
                     id="logoutBtn"
-                    onClick={handleLogout}
+                    onClick={() => logout()}
                   >
                     <span className="">
                       <RxExit className="w-6 h-6" />
@@ -82,7 +77,10 @@ const Dashboard = () => {
           </aside>
         </section>
       </div>
-      <div className="bgColor flex-1 flex items-center" style={{ width: "85%" }}>
+      <div
+        className="bgColor flex-1 flex items-center"
+        style={{ width: "85%" }}
+      >
         <Outlet></Outlet>
       </div>
     </div>
